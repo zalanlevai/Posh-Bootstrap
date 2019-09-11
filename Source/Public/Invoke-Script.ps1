@@ -53,7 +53,7 @@ function Invoke-Script {
         $ProgressMode = [ProgressMode]::Full
     )
 
-    Write-Host "bootstrap.ps ver 0.1.0`nCopyright (C) Zalán Bálint Lévai. All rights reserved.`n"
+    Write-Host "Posh-Bootstrap ver. $($Manifest.ModuleVersion)`nCopyright $($Manifest.Copyright)`n"
 
     # Assign indices to all of the supplied stages. These are used later for the progress display.
     for ($i = 0; $i -lt $Stages.Count; $i++) { $Stages[$i].Index = $i }

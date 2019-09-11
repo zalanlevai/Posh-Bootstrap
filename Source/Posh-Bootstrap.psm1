@@ -35,6 +35,12 @@ $Directories = @(
     }
 )
 
+# Reference to the module manifest file. This can be used to retreive module metadata within the
+# module code (e.g. version and copyright information).
+# NOTE: The interpreter marks this property as never used but this is not true as the variable is
+#       used by other files in the module code.
+$Manifest = Import-PowerShellDataFile $PSScriptRoot\Posh-Bootstrap.psd1
+
 foreach ($Directory in $Directories) {
     $AbsolutePath = Join-Path $PSScriptRoot -ChildPath $Directory.Path
 
