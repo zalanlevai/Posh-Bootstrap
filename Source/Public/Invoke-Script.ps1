@@ -7,15 +7,15 @@ function Invoke-Script {
             running scripts with a progress bar.
         .EXAMPLE
             Invoke-Script @(New-Stage "Title" { Do-Work })
-            
+
             Invoke a simple, single-stage script.
         .EXAMPLE
             Invoke-Script @(New-Stage "Title" { Do-Work }) -ProgressMode Compact
-            
+
             Invoke a simple, single-stage script with the compact progress bar.
         .EXAMPLE
             Invoke-Script @(New-Stage "Title" { Do-Work }) -ProgressMode None
-            
+
             Invoke a simple, single-stage script with no progress bar being displayed.
         .EXAMPLE
             >

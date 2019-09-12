@@ -1,4 +1,4 @@
-@{
+﻿@{
     # Author information
     Author = 'Zalán Bálint Lévai'
     CompanyName = 'zalanlevai'
