@@ -51,7 +51,7 @@ function Update-ProgressDisplay {
 
         # Display the compact progress bar.
         Write-Progress -Id 1 `
-            -Activity "($CurrentStageDisplayIndex/$($this.StageCount)) $($Script.CurrentStage.Name)" `
+            -Activity "($CurrentStageDisplayIndex/$($Script.StageCount)) $($Script.CurrentStage.Name)" `
             -Status "$($Script.Progress)% complete" `
             -CurrentOperation $(if (-not [string]::IsNullOrEmpty($CurrentOperation)) { "$CurrentOperation ($($Script.CurrentStage.Progress)% complete)" } else { "$($Script.CurrentStage.Progress)% complete" }) `
             -PercentComplete $Script.Progress `
