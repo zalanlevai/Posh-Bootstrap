@@ -78,7 +78,7 @@ Note the use of the cmdlets `Update-Progress` and `Complete-Stage`. These can be
 Finally, invoke the script as follows:
 
 ```PowerShell
-Invoke-Script $(
+Invoke-Script @(
     $(New-Stage -Name "Build" -Action {
         [...]
     }),
@@ -108,7 +108,7 @@ try {
         # Build the project using `dotnet publish`.
         $(New-Stage "Build" {
             Update-Progress 0 "Initializing Build Engine"
-    
+
             # This cmdlet calls the `OutputDelegate` ScriptBlock every time the process outputs a line to stdout.
             Watch-Process -ProcessFileName "dotnet" -ProcessArgs "publish $BuildPath" -RedirectOutput -OutputDelegate { param($Output)
                 if ($Output.Contains("Microsoft (R) Build Engine") -or $Output.Contains("Copyright (C) Microsoft Corporation")) {
@@ -124,19 +124,19 @@ try {
         $(New-Stage "Copy" {
             Update-Progress 0 "Establishing connection with the remote"
             $script:Session = New-PSSession -HostName $Address -UserName $User
-    
+
             Update-Progress 0 "Copying files to remote"
             $Files = Get-ChildItem $Source -File -Recurse
             for ($i = 0; $i -lt $Files.Count; $i++) {
                 $File = $Files[$i]
-    
+
                 # This cmdlet returns the path relative to `Root`.
                 $RelativePath = Get-RelativePath -Path $File -Root $Source
                 $DestinationFile = Split-Path (Join-Path -Path $Destination -ChildPath $RelativePath.Substring(2))
-    
+
                 Update-Progress $($i / $Files.Count * 100) "Copying $RelativePath"
                 Copy-Item $File -Destination $DestinationFile -ToSession $script:Session -Force
-    
+
                 Write-Host "Copied $RelativePath"
             }
         }),
